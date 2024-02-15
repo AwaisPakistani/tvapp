@@ -78,9 +78,64 @@ class Users {
     public function register(){
         //
     }
-    public function db(){
-        $db =include '../db.php';
-        return $db;
+    public function change_password(){
+        if (!isset($_SESSION['email'])) {
+            header('location:../login.php');
+        }
+        require "../db.php";
+        $email = $_SESSION['email'];
+        if (isset($_POST['change_password'])) {
+                $sql_all = "SELECT * FROM admins WHERE email='$email'";
+                $result_all = $conn->query($sql_all);
+                $row_all = $result_all->fetch_all(MYSQLI_ASSOC); 
+                
+                if (isset($_POST['new_password'])) {
+                    if (isset($_POST['retype_password'])) {
+                        $pass = $_POST['new_password'];
+                        $retype_pass = $_POST['retype_password'];
+                        if ($pass!=$retype_pass) {
+                            $message=  "Error: Passwords are not matching.";
+               
+                            $_SESSION['error']=$message;
+                            header('location:../users/change_password.php');
+                        }else{
+                            $password=password_hash($pass, PASSWORD_DEFAULT);
+                            //$currentdatatime = date("Y/m/d");
+                            $sql = "SELECT * FROM admins WHERE email='$email'";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                $row = $result->fetch_all(MYSQLI_ASSOC);
+                                $sql1 = "UPDATE admins SET password='$password' WHERE email='$email'";
+                                if ($conn->query($sql1) === TRUE) {
+                                    $message=  "Success: Password updated successfully.";
+                                    $_SESSION['success']=$message;
+                                    header('location:../index.php');
+                                } else {
+                                    echo "Error: " . $sql . "<br>" . $conn->error;
+                                }
+                            } else {
+                                $message=  "Error: Records are empty.";
+               
+                                $_SESSION['error']=$message;
+                                header('location:../users/change_password.php');
+                            }
+                            
+                        }
+                    
+                    } else{
+                        $message=  "Error: Re-type Password required.";
+               
+                        $_SESSION['error']=$message;
+                        header('location:../users/change_password.php');
+                    }
+                } else{
+                    $message=  "Error: Password required.";
+               
+                    $_SESSION['error']=$message;
+                    header('location:../users/change_password.php');
+                }
+        }
+        $conn->close();
     }
 }
 ?>

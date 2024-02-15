@@ -36,7 +36,7 @@ if(!isset($_SESSION['email'])){
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
         <img src="./assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">Material Dashboard 2</span>
+        <span class="ms-1 font-weight-bold text-white">One-Stop-TV</span>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -64,6 +64,14 @@ if(!isset($_SESSION['email'])){
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
             <span class="nav-link-text ms-1">Create Banner</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="users/change_password.php">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">Change Password</span>
           </a>
         </li>
        
@@ -187,7 +195,7 @@ if(!isset($_SESSION['email'])){
         </div>
       </div>
     </nav>
-   
+  
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row">

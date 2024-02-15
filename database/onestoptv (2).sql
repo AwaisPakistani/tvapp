@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2024 at 01:18 PM
+-- Generation Time: Feb 14, 2024 at 10:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `name`, `email`, `password`) VALUES
+(1, 'Admin', 'onestoptvapp@gmail.com', '$2y$10$EIMy8iVzu2n7j7hrdKmFfuwZCJp6jl6cmmebF6hur/o7QyQ9skzJ.');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `banner_images`
 --
 
@@ -40,11 +60,18 @@ CREATE TABLE `banner_images` (
 --
 
 INSERT INTO `banner_images` (`id`, `image`, `image_path`, `created_at`, `updated_at`) VALUES
-(2, 'Amazon-Logo.png', '../uploads/Amazon-Logo.png', NULL, NULL);
+(3, 'Capture.PNG', '../uploads/65cc454c2d4dc.PNG', NULL, NULL),
+(5, 'Amazon-Logo.png', '../uploads/Amazon-Logo.png', NULL, NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `banner_images`
@@ -57,10 +84,16 @@ ALTER TABLE `banner_images`
 --
 
 --
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `banner_images`
 --
 ALTER TABLE `banner_images`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

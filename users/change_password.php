@@ -1,10 +1,9 @@
 <?php
 session_start();
 include '../db.php';
-include '../functions/banners.php';
-$obj_banner=new Banners;
-$banners = $obj_banner->index();
-
+include '../functions/users.php';
+$obj_user=new Users;
+$obj_user->change_password();
 require_once('../layout/start_section.php');
 ?>
  <!-- Navbar -->
@@ -13,9 +12,9 @@ require_once('../layout/start_section.php');
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Banners</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Users</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Banners</h6>
+          <h6 class="font-weight-bolder mb-0">Change Password</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -26,7 +25,7 @@ require_once('../layout/start_section.php');
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
-            <a href="../functions/logout.php" class="nav-link text-body font-weight-bold px-0">
+              <a href="../functions/logout.php" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none">Logout</span>
               </a>
@@ -125,7 +124,7 @@ require_once('../layout/start_section.php');
     <!-- End Navbar -->
 <!-- Start Content -->
 <div class="container-fluid py-4">
-   <div class="row">
+<div class="row">
         <div class="col-xl-12">
               <?php 
               if(isset($_SESSION['success'])){
@@ -166,73 +165,50 @@ require_once('../layout/start_section.php');
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
+          
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Banners</h6>
-                <?php if (isset($_SESSION['success_message'])) {
-                 echo $_SESSION['success_message'];
-                } ?>
-                
+                <h6 class="text-white text-capitalize ps-3">Change Password
+                </h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
-              <div class="table-responsive p-0">
-                <?php 
-                if(isset($_SESSION['success_message'])){
-                  $message = $_SESSION['success_message'];
-                  echo $message;
-                }
-                ?>
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Image</th>
-                      <th class="text-secondary opacity-7">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php 
-                    $sr= 1;
-                    if ($banners) {
-                     
-                    while($row = $banners->fetch_assoc()) {
-                    ?>
-                    <tr>
-                      <td>
-                      <?php echo $sr++; ?>
-                      </td>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="<?php echo $row['image_path']; ?>" style="width:50%;" alt="Banner">
+            <!-- Start Data -->
+            <form class="px-4 py-4" method="post" action="" enctype="multipart/form-data">
+              <div class="row">
+                <div class="col-md-6">
+                     <div class="form-group">
+                        <label for="titlle">New Password</label>
+                          <div class="input-group mb-3 profile">
+                           
+                          <input type="password" class="form-control" style="border: 1px solid black; padding:5px;" name="new_password" id="new_password" placeholder="Enter new password">
                           </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                       <a href="update.php?banner_id=<?php echo $row['id']; ?>" class="btn btn-primary">Edit</a>
-                       <a href="../functions/delete_banner.php?banner_id=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a>
-                      </td>
-
-                    </tr> 
-                    <tr>
-                      <td></td>
-                      <td>
-                    <?php  }
-                  
-                  }else{
-                    echo "NO record found";
-                  } ?>
-                   </td>  
-                   <td></td>
-                  </tr>
-                  </tbody>
-                </table>
+                    </div>
+                </div>
               </div>
+              <div class="row">
+                <div class="col-md-6">
+                     <div class="form-group">
+                        <label for="titlle">Re-type Password</label>
+                          <div class="input-group mb-3 profile">
+                           
+                          <input type="password" class="form-control" style="border: 1px solid black; padding:5px;" name="retype_password" id="retype_password" placeholder="Re-type password">
+                          </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                <input type="submit" class="form-control btn-primary" name="change_password" value="Submit">
+                </div>
+              </div>
+            </form>
+            <!-- End Data -->
             </div>
           </div>
         </div>
       </div>
+    
 </div>
 
 <!-- End Content -->

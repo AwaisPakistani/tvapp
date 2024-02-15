@@ -22,9 +22,7 @@ class Banners {
     }
 
     public function store(){
-        include '../db.php';
-     
-      
+      include '../db.php';
       if (isset($_POST['add_banner']))
         {
            
@@ -84,7 +82,6 @@ class Banners {
                 }
                 // Close connections
                 $stmt->close();
-                $conn->close();
               }
             } else {
               $message =  "No image uploaded. You named wrong or other reason";
